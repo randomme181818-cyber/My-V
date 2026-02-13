@@ -2,140 +2,254 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For My LOVE ❤️</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(120deg, #ff758c, #ff7eb3);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  color: white;
+body{
+  margin:0;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  font-family:Poppins;
+  overflow:hidden;
+}
+.box{
+  max-width:420px;
+  background:#fff;
+  margin:40px auto;
+  padding:25px;
+  border-radius:20px;
+  text-align:center;
+  display:none;
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
+}
+.active{display:block;}
+
+button,input{
+  width:90%;
+  padding:12px;
+  margin-top:15px;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+}
+button{
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+}
+#noBtn{
+  background:#999;
+  position:relative;
 }
 
-.box {
-  background: rgba(0,0,0,0.4);
-  padding: 25px;
-  border-radius: 20px;
-  text-align: center;
-  max-width: 350px;
-  animation: fadeIn 2s;
+img{
+  width:100%;
+  border-radius:15px;
+  margin-top:15px;
 }
 
-input {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  width: 80%;
+#typed{
+  font-family:'Great Vibes';
+  font-size:28px;
+  color:#ff4d6d;
+  min-height:80px;
 }
 
-button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: none;
-  background: #ff4d6d;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+#caption{
+  margin-top:15px;
+  font-size:18px;
+  color:#ff4d6d;
+  font-family:'Great Vibes';
 }
 
-.hidden {
-  display: none;
+.heart{
+  position:fixed;
+  bottom:-20px;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-110vh);opacity:0;}
 }
 
-img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-top: 15px;
-  border: 4px solid #fff;
-  animation: zoomIn 2s;
-}
-
-@keyframes fadeIn {
-  from {opacity: 0; transform: scale(0.9);}
-  to {opacity: 1; transform: scale(1);}
-}
-
-@keyframes zoomIn {
-  from {transform: scale(0);}
-  to {transform: scale(1);}
-}
-
-/* Floating hearts */
-.heart {
-  position: absolute;
-  color: rgba(255,255,255,0.7);
-  animation: float 6s infinite;
-}
-
-@keyframes float {
-  0% {transform: translateY(100vh);}
-  100% {transform: translateY(-10vh);}
-}
+#gallery img{display:none;}
+#gallery img.active{display:block;}
 </style>
 </head>
 
 <body>
 
-<div class="box" id="lock">
-  <h2>🔐 Enter Password</h2>
-  <input type="password" id="pass" placeholder="Hint: Something sweet ❤️">
-  <br>
-  <button onclick="unlock()">Open 💌</button>
+<!-- MUSIC -->
+<audio id="music1" src="music1.mp3" loop></audio>
+<audio id="music2" src="music2.mp3" loop></audio>
+
+<!-- PAGE 1 -->
+<div class="box active" id="p1">
+  <h2>Enter Password 🔐</h2>
+  <input type="password" id="pass1">
+  <button onclick="go1()">Enter ❤️</button>
 </div>
 
-<div class="box hidden" id="content">
-  <h1>Happy Valentine’s Day 🌹</h1>
-  <img src="photo.jpg" alt="Her Photo">
-  <p>
-    Dear <b>V🦋✨</b>,<br><br>
-    This page carries feelings I can’t say aloud 💕  
-    You make ordinary moments special  
-    and smiles come naturally when you’re around.
-    I love every part of you
-    Be my Valentine❤️
-    <br><br>
-    — Someone who truly admires you 🌸
-  </p>
+<!-- PAGE 2 -->
+<div class="box" id="p2">
+  <div id="typed"></div>
+  <img src="her1.jpg">
+  <button onclick="go2()">Next 💕</button>
 </div>
 
-<audio id="music" loop>
-  <source src="Khudaa bhi.m4a" type="audio/mp4">
-</audio>
+<!-- PAGE 3 -->
+<div class="box" id="p3">
+  <h2>Will you be my Valentine? 💖</h2>
+  <p><i>Click YES only if you really feel it ❤️</i></p>
+  <button onclick="yes()">YES 💕</button>
+  <button id="noBtn">NO</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="box" id="p4">
+  <h3>Ask me the password 🌸</h3>
+  <input type="password" id="pass2">
+  <button onclick="go3()">Unlock 💞</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="box" id="p5">
+  <h2>For You 🧸</h2>
+  <img src="teddy.png">
+  <button onclick="go4()">One more surprise 🎁</button>
+</div>
+
+<!-- PAGE 6 : SLIDESHOW -->
+<div class="box" id="p6">
+  <h3>Our Moments ❤️</h3>
+
+  <div id="gallery">
+    <img src="her2.jpg" class="active">
+    <img src="her3.jpg">
+    <img src="her4.jpg">
+    <img src="her5.jpg">
+    <img src="her6.jpg">
+  </div>
+
+  <!-- COMMENT BELOW PHOTO -->
+  <p id="caption">This smile… it quietly makes everything better ❤️</p>
+</div>
+
+<!-- PAGE 7 -->
+<div class="box" id="p7">
+  <h2>✨ I don’t promise perfection,  
+but I promise honesty, care, and a heart that chooses you.  
+Not just today… but in all the days that follow ❤️ ✨</h2>
+</div>
 
 <script>
-const PASSWORD = "valentine";
+/* HEARTS */
+function startHearts(){
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(20+Math.random()*20)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },300);
+}
 
-function unlock() {
-  const input = document.getElementById("pass").value;
-  if (input === PASSWORD) {
-    document.getElementById("lock").classList.add("hidden");
-    document.getElementById("content").classList.remove("hidden");
-    document.getElementById("music").play();
-    createHearts();
-  } else {
-    alert("Wrong password 💔");
+/* CONFETTI */
+function startConfetti(){
+  setInterval(()=>confetti({particleCount:50,spread:80,origin:{y:0.6}}),2000);
+}
+
+/* MUSIC */
+function fadeIn(audio,maxVol){
+  audio.volume=0;
+  audio.play();
+  let v=0;
+  let t=setInterval(()=>{
+    v+=0.04;
+    audio.volume=Math.min(v,maxVol);
+    if(v>=maxVol) clearInterval(t);
+  },200);
+}
+function fadeOut(audio){
+  let v=audio.volume;
+  let t=setInterval(()=>{
+    v-=0.04;
+    audio.volume=Math.max(v,0);
+    if(v<=0){audio.pause();clearInterval(t);}
+  },200);
+}
+
+/* FLOW */
+function go1(){
+  if(pass1.value==="GARVIN"){
+    p1.classList.remove("active");
+    p2.classList.add("active");
+    fadeIn(music1,0.25);
+    startHearts(); startConfetti();
+    let msg="Welcome… I’m really glad you’re here ❤️";
+    let i=0;
+    let t=setInterval(()=>{
+      typed.innerHTML+=msg.charAt(i++);
+      if(i>=msg.length) clearInterval(t);
+    },80);
+  }
+}
+function go2(){p2.classList.remove("active");p3.classList.add("active");}
+function yes(){p3.classList.remove("active");p4.classList.add("active");}
+
+function go3(){
+  if(pass2.value==="vandana"){
+    p4.classList.remove("active");
+    p5.classList.add("active");
   }
 }
 
-function createHearts() {
-  for (let i = 0; i < 15; i++) {
-    let heart = document.createElement("div");
-    heart.innerHTML = "❤️";
-    heart.className = "heart";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-    heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
-    document.body.appendChild(heart);
-  }
+function go4(){
+  p5.classList.remove("active");
+  p6.classList.add("active");
+  fadeOut(music1);
+  fadeIn(music2,0.32);
+  startSlideshow();
+  setTimeout(()=>{
+    p6.classList.remove("active");
+    p7.classList.add("active");
+  },22000);
+}
+
+/* SLIDESHOW COMMENTS (EDIT HERE IF NEEDED) */
+const captions=[
+  "This smile… it quietly makes everything better ❤️",
+  "With you, even ordinary moments feel special 🌸",
+  "Somehow, you became my calm in all the noise 💕",
+  "Being with you feels like being exactly where I belong 🏡",
+  "And in all of this… it’s always been you 🤍"
+];
+
+let idx=0;
+function startSlideshow(){
+  setInterval(()=>{
+    let imgs=document.querySelectorAll("#gallery img");
+    imgs.forEach(i=>i.classList.remove("active"));
+    idx=(idx+1)%imgs.length;
+    imgs[idx].classList.add("active");
+    document.getElementById("caption").innerText=captions[idx];
+  },4000);
+}
+
+/* NO BUTTON RUNS AWAY */
+const noBtn=document.getElementById("noBtn");
+if(noBtn){
+  noBtn.addEventListener("mouseenter",moveNo);
+  noBtn.addEventListener("touchstart",moveNo);
+}
+function moveNo(){
+  const x=Math.random()*200-100;
+  const y=Math.random()*200-100;
+  noBtn.style.transform=`translate(${x}px,${y}px)`;
 }
 </script>
 
