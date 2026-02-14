@@ -5,7 +5,6 @@
 <title>For You ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
 body{
@@ -44,7 +43,7 @@ button{
   position:relative;
 }
 
-img{
+img,video{
   width:100%;
   border-radius:15px;
   margin-top:15px;
@@ -59,11 +58,11 @@ img{
 
 #caption{
   margin-top:18px;
-  font-size:22px;              /* ⬅ bigger text */
-  color:#ff2f68;               /* ⬅ slightly darker for clarity */
+  font-size:22px;
+  color:#ff2f68;
   font-family:'Great Vibes';
-  font-weight:600;             /* ⬅ makes it more readable */
-  line-height:1.4;             /* ⬅ better spacing */
+  font-weight:600;
+  line-height:1.4;
 }
 .heart{
   position:fixed;
@@ -71,8 +70,7 @@ img{
   animation:float 6s linear infinite;
 }
 @keyframes float{
-  0%{transform:translateY(0);opacity:1;}
-  100%{transform:translateY(-110vh);opacity:0;}
+  to{transform:translateY(-110vh);opacity:0;}
 }
 
 #gallery img{display:none;}
@@ -82,7 +80,6 @@ img{
 
 <body>
 
-<!-- MUSIC -->
 <audio id="music1" src="music1.mp3" loop></audio>
 <audio id="music2" src="music2.mp3" loop></audio>
 
@@ -108,29 +105,25 @@ img{
   <button id="noBtn">NO</button>
 </div>
 
-<!-- PAGE 4 -->
+<!-- PAGE 4 : TEDDY (AFTER YES) -->
 <div class="box" id="p4">
+  <h2>For You 🧸</h2>
+  <video autoplay loop muted playsinline>
+    <source src="teddy.mp4" type="video/mp4">
+  </video>
+  <button onclick="goTeddyNext()">Next 💖</button>
+</div>
+
+<!-- PAGE 5 : SECOND PASSWORD -->
+<div class="box" id="p5">
   <h3>Ask me the password 🌸</h3>
   <input type="password" id="pass2">
   <button onclick="go3()">Unlock 💞</button>
 </div>
 
-<!-- PAGE 5 -->
-<div class="box" id="p5">
-  <h2>For You 🧸</h2>
-
-  <video autoplay loop muted playsinline style="width:100%; border-radius:15px; margin-top:15px;">
-    <source src="teddy.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-
-  <button onclick="go4()">One more surprise 🎁</button>
-</div>
-
-<!-- PAGE 6 : SLIDESHOW -->
+<!-- PAGE 6 -->
 <div class="box" id="p6">
   <h3>My World ❤️</h3>
-
   <div id="gallery">
     <img src="her2.jpg" class="active">
     <img src="her3.jpg">
@@ -138,16 +131,16 @@ img{
     <img src="her5.jpg">
     <img src="her6.jpg">
   </div>
-
-  <!-- COMMENT BELOW PHOTO -->
   <p id="caption">This smile… it quietly makes everything better ❤️</p>
 </div>
 
 <!-- PAGE 7 -->
 <div class="box" id="p7">
-  <h2>✨ I don’t promise perfection,  
-but I promise honesty, care, and a heart that chooses you.  
-Not just today… but in all the days that follow ❤️ ✨</h2>
+  <h2>
+    ✨ I don’t promise perfection,<br>
+    but I promise honesty, care, and a heart that chooses you.<br>
+    Not just today… but in all the days that follow ❤️ ✨
+  </h2>
 </div>
 
 <script>
@@ -164,86 +157,50 @@ function startHearts(){
   },300);
 }
 
-/* CONFETTI */
-function startConfetti(){
-  setInterval(()=>confetti({particleCount:50,spread:80,origin:{y:0.6}}),2000);
-}
-
 /* MUSIC */
-function fadeIn(audio,maxVol){
-  audio.volume=0;
-  audio.play();
-  let v=0;
+function fadeIn(a,v){
+  a.volume=0;a.play();
+  let x=0;
   let t=setInterval(()=>{
-    v+=0.04;
-    audio.volume=Math.min(v,maxVol);
-    if(v>=maxVol) clearInterval(t);
+    x+=0.04;a.volume=Math.min(x,v);
+    if(x>=v)clearInterval(t);
   },200);
 }
-function fadeOut(audio){
-  let v=audio.volume;
+function fadeOut(a){
+  let x=a.volume;
   let t=setInterval(()=>{
-    v-=0.04;
-    audio.volume=Math.max(v,0);
-    if(v<=0){audio.pause();clearInterval(t);}
+    x-=0.04;a.volume=Math.max(x,0);
+    if(x<=0){a.pause();clearInterval(t);}
   },200);
 }
 
 /* FLOW */
 function go1(){
-  const pass = document.getElementById("pass1").value.trim();
-  const page1 = document.getElementById("p1");
-  const page2 = document.getElementById("p2");
-  const typedText = document.getElementById("typed");
-  const music = document.getElementById("music1");
-
-  if(pass.toUpperCase() === "GARVIN"){
-    page1.classList.remove("active");
-    page2.classList.add("active");
-
-    fadeIn(music, 0.25);
+  if(pass1.value.toUpperCase()==="GARVIN"){
+    p1.classList.remove("active");
+    p2.classList.add("active");
+    fadeIn(music1,0.25);
     startHearts();
-
-    let msg = "Welcome My world 🌍🦋... For my Valentine ✨🌺❤️";
-    let i = 0;
-    typedText.innerHTML = "";
-    let t = setInterval(()=>{
-      typedText.innerHTML += msg.charAt(i++);
-      if(i >= msg.length) clearInterval(t);
-    }, 80);
-  } else {
-    alert("Wrong password 😕");
-  }
+    let msg="Welcome My world 🌍🦋... For my Valentine ✨🌺❤️";
+    let i=0;typed.innerHTML="";
+    let t=setInterval(()=>{typed.innerHTML+=msg[i++];if(i>=msg.length)clearInterval(t);},80);
+  } else alert("Wrong password 😕");
 }
 function go2(){p2.classList.remove("active");p3.classList.add("active");}
 function yes(){p3.classList.remove("active");p4.classList.add("active");}
+function goTeddyNext(){p4.classList.remove("active");p5.classList.add("active");}
 
 function go3(){
-  const pass = document.getElementById("pass2").value.trim();
-  const page4 = document.getElementById("p4");
-  const page5 = document.getElementById("p5");
-
-  if(pass.toLowerCase() === "vandana"){
-    page4.classList.remove("active");
-    page5.classList.add("active");
-  } else {
-    alert("Wrong password 😕");
-  }
+  if(pass2.value.toLowerCase()==="vandana"){
+    p5.classList.remove("active");
+    p6.classList.add("active");
+    fadeOut(music1);fadeIn(music2,0.32);
+    startSlideshow();
+    setTimeout(()=>{p6.classList.remove("active");p7.classList.add("active");},22000);
+  } else alert("Wrong password 😕");
 }
 
-function go4(){
-  p5.classList.remove("active");
-  p6.classList.add("active");
-  fadeOut(music1);
-  fadeIn(music2,0.32);
-  startSlideshow();
-  setTimeout(()=>{
-    p6.classList.remove("active");
-    p7.classList.add("active");
-  },22000);
-}
-
-/* SLIDESHOW COMMENTS (EDIT HERE IF NEEDED) */
+/* SLIDESHOW */
 const captions=[
   "This smile… it quietly makes everything better ❤️",
   "With you, even ordinary moments feel special 🌸",
@@ -251,7 +208,6 @@ const captions=[
   "Being with you feels like being exactly where I belong 🏡",
   "And in all of this… it’s always been you 🤍"
 ];
-
 let idx=0;
 function startSlideshow(){
   setInterval(()=>{
@@ -259,21 +215,13 @@ function startSlideshow(){
     imgs.forEach(i=>i.classList.remove("active"));
     idx=(idx+1)%imgs.length;
     imgs[idx].classList.add("active");
-    document.getElementById("caption").innerText=captions[idx];
+    caption.innerText=captions[idx];
   },4000);
 }
 
-/* NO BUTTON RUNS AWAY */
-const noBtn=document.getElementById("noBtn");
-if(noBtn){
-  noBtn.addEventListener("mouseenter",moveNo);
-  noBtn.addEventListener("touchstart",moveNo);
-}
-function moveNo(){
-  const x=Math.random()*200-100;
-  const y=Math.random()*200-100;
-  noBtn.style.transform=`translate(${x}px,${y}px)`;
-}
+/* NO BUTTON */
+noBtn.addEventListener("mouseenter",()=>noBtn.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`);
+noBtn.addEventListener("touchstart",()=>noBtn.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`);
 </script>
 
 </body>
