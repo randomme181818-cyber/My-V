@@ -191,26 +191,44 @@ function fadeOut(audio){
 
 /* FLOW */
 function go1(){
-  if(pass1.value==="GARVIN"){
-    p1.classList.remove("active");
-    p2.classList.add("active");
-    fadeIn(music1,0.25);
-    startHearts(); startConfetti();
-    let msg="Welcome… for My world🌍✨❤️ I’m really glad you’re here ❤️";
-    let i=0;
-    let t=setInterval(()=>{
-      typed.innerHTML+=msg.charAt(i++);
-      if(i>=msg.length) clearInterval(t);
-    },80);
+  const pass = document.getElementById("pass1").value.trim();
+  const page1 = document.getElementById("p1");
+  const page2 = document.getElementById("p2");
+  const typedText = document.getElementById("typed");
+  const music = document.getElementById("music1");
+
+  if(pass.toUpperCase() === "GARVIN"){
+    page1.classList.remove("active");
+    page2.classList.add("active");
+
+    fadeIn(music, 0.25);
+    startHearts();
+    startConfetti();
+
+    let msg = "Welcome My world 🌍🦋... For my Valentine ✨🌺❤️";
+    let i = 0;
+    typedText.innerHTML = "";
+    let t = setInterval(()=>{
+      typedText.innerHTML += msg.charAt(i++);
+      if(i >= msg.length) clearInterval(t);
+    }, 80);
+  } else {
+    alert("Wrong password 😕");
   }
 }
 function go2(){p2.classList.remove("active");p3.classList.add("active");}
 function yes(){p3.classList.remove("active");p4.classList.add("active");}
 
 function go3(){
-  if(pass2.value==="vandana"){
-    p4.classList.remove("active");
-    p5.classList.add("active");
+  const pass = document.getElementById("pass2").value.trim();
+  const page4 = document.getElementById("p4");
+  const page5 = document.getElementById("p5");
+
+  if(pass.toLowerCase() === "vandana"){
+    page4.classList.remove("active");
+    page5.classList.add("active");
+  } else {
+    alert("Wrong password 😕");
   }
 }
 
