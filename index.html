@@ -61,6 +61,20 @@ img,video{
   line-height:1.4;
 }
 
+/* 💌 PAPER CARD GLOW */
+#p8{
+  background:#fffdf7;
+  box-shadow:
+    0 0 25px rgba(255,120,150,0.35),
+    0 0 60px rgba(255,200,220,0.45);
+  border:1px solid rgba(255,180,200,0.6);
+}
+
+#finalText{
+  white-space:pre-line;
+  font-size:15px;
+}
+
 .heart{
   position:fixed;
   bottom:-20px;
@@ -102,7 +116,7 @@ img,video{
   <button id="noBtn">NO</button>
 </div>
 
-<!-- PAGE 4 : TEDDY -->
+<!-- PAGE 4 -->
 <div class="box" id="p4">
   <h2>Thankewww Cutipie💗🩵</h2>
   <video autoplay loop muted playsinline>
@@ -111,14 +125,14 @@ img,video{
   <button onclick="goTeddyNext()">Next 💖</button>
 </div>
 
-<!-- PAGE 5 : SECOND PASSWORD -->
+<!-- PAGE 5 -->
 <div class="box" id="p5">
   <h3>Ask me the password 🌸</h3>
   <input type="password" id="pass2">
   <button onclick="go3()">Unlock 💞</button>
 </div>
 
-<!-- PAGE 6 : SLIDESHOW -->
+<!-- PAGE 6 -->
 <div class="box" id="p6">
   <h3>My World ❤️</h3>
   <div id="gallery">
@@ -131,20 +145,19 @@ img,video{
   <p id="caption">This smile… it quietly makes everything better ❤️</p>
 </div>
 
-<!-- PAGE 7 : OPEN CARD -->
+<!-- PAGE 7 -->
 <div class="box" id="p7">
   <h2>💌 A little something for you</h2>
   <p><i>Click when you’re ready ❤️</i></p>
   <button onclick="openCard()">Open my Valentine Card 💖</button>
 </div>
 
-<!-- PAGE 8 : FINAL VALENTINE CARD -->
+<!-- PAGE 8 -->
 <div class="box" id="p8">
   <h2 style="font-family:'Great Vibes'; font-size:32px; color:#ff4d6d;">
     My Dearest Valentine 🩵💕
   </h2>
-
-  <p id="finalText" style="margin-top:20px; line-height:1.6; color:#444;"></p>
+  <p id="finalText"></p>
 </div>
 
 <script>
@@ -223,7 +236,7 @@ function startSlideshow(){
   },4000);
 }
 
-/* OPEN CARD + TYPEWRITER */
+/* OPEN CARD + LINE-BY-LINE TYPEWRITER */
 function openCard(){
   p7.classList.remove("active");
   p8.classList.add("active");
@@ -231,39 +244,43 @@ function openCard(){
 }
 
 function typeFinalMessage(){
-  const text=`From the moment you quietly became a part of my life,
-something changed in me🫶🫀
-The world felt softer, days felt lighter,
-and smiles came easier—just because of you🫂💞
+  const lines=[
+"My Dearest Valentine 🩵💕",
+"",
+"From the moment you quietly became a part of my life,",
+"something changed in me🫶🫀",
+"The world felt softer, days felt lighter,",
+"and smiles came easier—just because of you🫂💞",
+"",
+"There’s a calm in your presence that my heart feels❤️🦋",
+"Your smile has a way of healing me.",
+"And loving you feels less like effort",
+"and more like home🏡🥰",
+"",
+"Every moment with you is something I carry with me",
+"in my thoughts, in my heart, in the way I see tomorrow🔮💟",
+"You are not just someone I love,",
+"you are my safe place, my closest friend,",
+"and the person my heart chooses, again and again.",
+"",
+"Today, and on all the days that follow✨🌍,",
+"I don’t promise perfection",
+"but I promise honesty, patience, laughter, loyalty,",
+"and a love that grows stronger with time🤗🩵",
+"",
+"I am still waiting for your YES and I will wait more",
+"till you decide you want spend your life with me or not.",
+"",
+"Forever yours,",
+"With all my heart💝😘"
+];
 
-There’s a calm in your presence that my heart feels❤️🦋
-Your smile has a way of healing me.
-And loving you feels less like effort
-and more like home🏡🥰
-
-Every moment with you is something I carry with me 
-in my thoughts, in my heart, in the way I see tomorrow🔮💟
-You are not just someone I love,
-you are my safe place, my closest friend,
-and the person my heart chooses, again and again.
-
-Today, and on all the days that follow✨🌍,
-I don’t promise perfection
-but I promise honesty, patience, laughter, loyalty,
-and a love that grows stronger with time🤗🩵
-
-I am still waiting for your YES and I will wait more till you decide you want spend your life with me or not.
-
-Forever yours,
-With all my heart💝😘`;
-
-  const words=text.split(" ");
   let i=0;
-  finalText.innerHTML="";
+  finalText.innerText="";
   let t=setInterval(()=>{
-    finalText.innerHTML+=words[i++]+" ";
-    if(i>=words.length)clearInterval(t);
-  },120);
+    finalText.innerText+=lines[i++]+"\n";
+    if(i>=lines.length)clearInterval(t);
+  },700); /* slower, emotional */
 }
 
 /* NO BUTTON */
