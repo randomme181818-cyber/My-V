@@ -300,11 +300,11 @@ but I promise honesty, patience, laughter, loyalty,
 and a love that grows stronger with time🤗🩵
 
 I am still waiting for your YES and I will wait more till you decide you want spend your life with me or not.
-
+[[GAP]]
 Forever yours,
 With all my heart💝😘`;
 
-  const words=text.split(" ");
+  const words = text.replace('[[GAP]]', '<br><br>').split(" ");
   let i=0;
   finalText.innerHTML="";
   let t=setInterval(()=>{
