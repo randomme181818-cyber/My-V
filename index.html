@@ -118,7 +118,12 @@ img{
 <!-- PAGE 5 -->
 <div class="box" id="p5">
   <h2>For You 🧸</h2>
-  <img src="teddy.png">
+
+  <video autoplay loop muted playsinline style="width:100%; border-radius:15px; margin-top:15px;">
+    <source src="teddy.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
   <button onclick="go4()">One more surprise 🎁</button>
 </div>
 
@@ -191,7 +196,8 @@ function go1(){
     p2.classList.add("active");
     fadeIn(music1,0.25);
     startHearts(); startConfetti();
-    let msg="Welcome… I’m really glad you’re here ❤️";
+    let msg="Welcome… for My world🌍✨❤️
+      I’m really glad you’re here ❤️";
     let i=0;
     let t=setInterval(()=>{
       typed.innerHTML+=msg.charAt(i++);
