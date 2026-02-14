@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For My World❤️</title>
+<title>For MY World🌍❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
 
@@ -38,10 +38,6 @@ button{
   color:white;
   cursor:pointer;
 }
-#noBtn{
-  background:#999;
-  position:relative;
-}
 
 img,video{
   width:100%;
@@ -64,6 +60,7 @@ img,video{
   font-weight:600;
   line-height:1.4;
 }
+
 .heart{
   position:fixed;
   bottom:-20px;
@@ -101,13 +98,13 @@ img,video{
 <div class="box" id="p3">
   <h2>Will you be my Valentine? 💖</h2>
   <p><i>Click YES only if you really feel it ❤️</i></p>
-  <button onclick="yes()">YES💕</button>
+  <button onclick="yes()">YES 💕</button>
   <button id="noBtn">NO</button>
 </div>
 
-<!-- PAGE 4 : TEDDY (AFTER YES) -->
+<!-- PAGE 4 : TEDDY -->
 <div class="box" id="p4">
-  <h2>For You 🧸</h2>
+  <h2>Thankewww Cutipie💗🩵</h2>
   <video autoplay loop muted playsinline>
     <source src="teddy.mp4" type="video/mp4">
   </video>
@@ -121,7 +118,7 @@ img,video{
   <button onclick="go3()">Unlock 💞</button>
 </div>
 
-<!-- PAGE 6 -->
+<!-- PAGE 6 : SLIDESHOW -->
 <div class="box" id="p6">
   <h3>My World ❤️</h3>
   <div id="gallery">
@@ -134,13 +131,20 @@ img,video{
   <p id="caption">This smile… it quietly makes everything better ❤️</p>
 </div>
 
-<!-- PAGE 7 -->
+<!-- PAGE 7 : OPEN CARD -->
 <div class="box" id="p7">
-  <h2>
-    ✨ I don’t promise perfection,<br>
-    but I promise honesty, care, and a heart that chooses you.<br>
-    Not just today… but in all the days that follow ❤️ ✨
+  <h2>💌 A little something for you</h2>
+  <p><i>Click when you’re ready ❤️</i></p>
+  <button onclick="openCard()">Open my Valentine Card 💖</button>
+</div>
+
+<!-- PAGE 8 : FINAL VALENTINE CARD -->
+<div class="box" id="p8">
+  <h2 style="font-family:'Great Vibes'; font-size:32px; color:#ff4d6d;">
+    My Dearest Valentine 🩵💕
   </h2>
+
+  <p id="finalText" style="margin-top:20px; line-height:1.6; color:#444;"></p>
 </div>
 
 <script>
@@ -217,6 +221,49 @@ function startSlideshow(){
     imgs[idx].classList.add("active");
     caption.innerText=captions[idx];
   },4000);
+}
+
+/* OPEN CARD + TYPEWRITER */
+function openCard(){
+  p7.classList.remove("active");
+  p8.classList.add("active");
+  typeFinalMessage();
+}
+
+function typeFinalMessage(){
+  const text=`From the moment you quietly became a part of my life,
+something changed in me🫶🫀
+The world felt softer, days felt lighter,
+and smiles came easier—just because of you🫂💞
+
+There’s a calm in your presence that my heart feels❤️🦋
+Your smile has a way of healing me.
+And loving you feels less like effort
+and more like home🏡🥰
+
+Every moment with you is something I carry with me 
+in my thoughts, in my heart, in the way I see tomorrow🔮💟
+You are not just someone I love,
+you are my safe place, my closest friend,
+and the person my heart chooses, again and again.
+
+Today, and on all the days that follow✨🌍,
+I don’t promise perfection
+but I promise honesty, patience, laughter, loyalty,
+and a love that grows stronger with time🤗🩵
+
+I am still waiting for your YES and I will wait more till you decide you want spend your life with me or not.
+
+Forever yours,
+With all my heart💝😘`;
+
+  const words=text.split(" ");
+  let i=0;
+  finalText.innerHTML="";
+  let t=setInterval(()=>{
+    finalText.innerHTML+=words[i++]+" ";
+    if(i>=words.length)clearInterval(t);
+  },120);
 }
 
 /* NO BUTTON */
